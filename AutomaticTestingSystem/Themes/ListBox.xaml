@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AutomaticTestingSystem">
+    
+    <!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+    --><!--非高亮背景色--><!--
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Red"/>
+    --><!--高亮文本色--><!--
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+    --><!--非高亮文本色--><!--
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Green"/>-->
+    <Style x:Key="CustomListBox" TargetType="{x:Type ListBox}" >
+
+        <Style.Resources>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+        </Style.Resources>
+        <!--重定义ListBox中项的样式-->
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate DataType="local:AtsItem">
+
+                    <Border BorderBrush="SteelBlue" BorderThickness="0" CornerRadius="5" 
+                            Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}}">
+                        <TextBlock Text="{Binding Name}" Margin="32 0 32 0" HorizontalAlignment="Stretch"/>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--自定义选中项的颜色-->
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                            <Setter Property="ListBoxItem.Background" Value="Green"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

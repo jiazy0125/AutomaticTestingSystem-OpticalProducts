@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.Settings.GPIBType"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutomaticTestingSystem.UserControls.Settings"
+             xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ComboBox HorizontalAlignment="Stretch" x:Name="GPIBPortComboBox" Style="{StaticResource MaterialDesignFloatingHintComboBoxClssic}"
+                  SelectedItem="{Binding GPIBAddress}" Height="50" Margin="4" VerticalContentAlignment="Bottom">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Foreground="Blue" Margin="-1 0 0 0" Text="GPIB Address"/>
+                </wpf:HintAssist.Hint>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Margin="4" Width="100" HorizontalAlignment="Left" Click="Refresh_Click">
+                Refresh
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.InputDialog.InputDialog2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" x:Name="InputDialog" >
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="4" Orientation="Vertical">
+            <TextBox x:Name="InputTextBox" wpf:HintAssist.Hint="{Binding InputModel.Label1}" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                     Margin="4 4" MaxWidth="240" FontSize="16" Text="{Binding InputModel.Input1, UpdateSourceTrigger=PropertyChanged}" 
+                     HorizontalAlignment="Stretch">
+            </TextBox>
+            <TextBlock x:Name="WarningLabel1" Foreground="Red" Margin="4"  Visibility="{Binding InputModel.Visibility1}" Text="{Binding InputModel.WarningMsg1}"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" wpf:HintAssist.Foreground="Red" Margin="4"
+                  wpf:TextFieldAssist.UnderlineBrush="Red" wpf:HintAssist.Hint="{Binding InputModel.Label2}"
+                  wpf:HintAssist.HintOpacity="0.8"
+                  wpf:HintAssist.FloatingScale="0.9" TextWrapping="Wrap" TextAlignment="Left"
+                  MaxWidth="240" Text="{Binding InputModel.Input2, UpdateSourceTrigger=PropertyChanged}" >
+            </TextBox>
+            <TextBlock x:Name="WarningLabel2" Foreground="Red" Margin="4" Visibility="{Binding InputModel.Visibility2}" Text="{Binding InputModel.WarningMsg2}"/>
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1"
+                    Margin="10 0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}" Content="ACCEPT" 
+                    IsEnabled="{Binding InputModel.Button1Enable}">
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button IsCancel="True" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}" Content="CANCEL">
+                <Button.CommandParameter>
+                    <system:Boolean>False
+                    </system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

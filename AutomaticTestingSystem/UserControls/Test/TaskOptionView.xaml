@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.Test.TaskOptionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel Grid.Row="3" Orientation="Vertical" VerticalAlignment="Center">
+            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Width="150" Command="{Binding Calibration}"
+                        ToolTip="Click to calibration"
+                        wpf:RippleAssist.Feedback="#DD000000" Margin="0 10">
+                calibration (F2)
+            </Button>
+            <Button Style="{StaticResource MaterialDesignRaisedButton}" Name="StartButton"
+                        wpf:ButtonProgressAssist.Value="-1"
+                        wpf:ButtonProgressAssist.IsIndicatorVisible="True"
+                        wpf:ButtonProgressAssist.IsIndeterminate="True"
+                        Content="Start (F5)" Command="{Binding Start}"
+                        ToolTip="Click to start test"
+                        Width="150" Margin="0,10" />
+        </StackPanel>
+    </Grid>
+</UserControl>

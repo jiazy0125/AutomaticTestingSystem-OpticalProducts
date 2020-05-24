@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.ProcessDesign.ProcessManage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutomaticTestingSystem.UserControls.ProcessDesign"
+             xmlns:beh="clr-namespace:AutomaticTestingSystem.Framework.CommandBehaviors"
+             mc:Ignorable="d" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Width="1" Grid.Column="1"/>
+        <local:ItemsListBox x:Name="ProecessItem" Margin="2 0"
+                            beh:CommandBehavior.Event="PreviewMLBtnDown" 
+                            beh:CommandBehavior.PassEventArgs="True"
+                            beh:CommandBehavior.Command="{Binding ElementName=Group, Path=DataContext.ItemController.ProcessPreviewMouseLeftDown}">
+        </local:ItemsListBox>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GridSplitter Height="1" Grid.Row="1" HorizontalAlignment="Stretch" IsEnabled="False"/>
+            <local:GroupItems x:Name="Group" IsEnabled="{Binding ElementName=ProecessItem, Path=DataContext.PPModel.SelectedItem,
+                Converter={StaticResource NullToEnable}}" Margin="2 0"/>
+            <local:GroupItemSetting Grid.Row="2" Margin=" 2" DataContext="{Binding ElementName=Group, Path=DataContext.ItemModel.SelectedItem}"
+                                    CurrentProcessLevel="{Binding ElementName=Group, Path=DataContext.ItemModel.CurrentItemLevel, 
+                UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

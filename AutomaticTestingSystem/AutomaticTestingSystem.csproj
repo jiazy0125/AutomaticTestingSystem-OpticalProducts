@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4AF0B6E9-74CA-4AF8-93F2-E7C8FA1E34F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AutomaticTestingSystem</RootNamespace>
+    <AssemblyName>AutomaticTestingSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ivi.Visa, Version=5.11.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Ivi.Visa.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.LabVIEW.Interop, Version=1.6.0.0, Culture=neutral, PublicKeyToken=daeb5dc76be4e32a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\National Instruments\Shared\LabVIEW Run-Time\2019\NationalInstruments.LabVIEW.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.Visa, Version=19.0.0.49152, Culture=neutral, PublicKeyToken=2eaa5af0834e221d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\NationalInstruments.Visa.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Base\AtsModel.cs" />
+    <Compile Include="Base\ATSViewModel.cs" />
+    <Compile Include="Framework\Common\ActionResult.cs" />
+    <Compile Include="Framework\Common\BindingProxy.cs" />
+    <Compile Include="Common\ClassClone.cs" />
+    <Compile Include="Framework\CommandBehaviors\CommandBehavior.cs" />
+    <Compile Include="Framework\CommandBehaviors\CommandBehaviorBinding.cs" />
+    <Compile Include="Framework\Common\DataExtension.cs" />
+    <Compile Include="Framework\Common\EnumDefinition.cs" />
+    <Compile Include="Framework\Common\ObjectExtensions.cs" />
+    <Compile Include="Framework\Common\SystemAttribute.cs" />
+    <Compile Include="Framework\Communication\CommunicationBase.cs" />
+    <Compile Include="Framework\Communication\GPIBHelper.cs" />
+    <Compile Include="Framework\Communication\NIVisaPortOperator.cs" />
+    <Compile Include="Framework\Communication\TcpIpHelper.cs" />
+    <Compile Include="Framework\Communication\UdpHelper.cs" />
+    <Compile Include="Framework\Communication\USBHelper.cs" />
+    <Compile Include="Framework\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\Converters\CommnicationTypeConvert.cs" />
+    <Compile Include="Framework\Converters\PassFailConverter.cs" />
+    <Compile Include="Framework\IniFileHelper\InIHelper.cs" />
+    <Compile Include="InstrumentDriver\EVB1_QsfpDD.cs" />
+    <Compile Include="UserControls\InputDialog\InputDialog3.xaml.cs">
+      <DependentUpon>InputDialog3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ModuleTables\Model\TableInfoModel.cs" />
+    <Compile Include="UserControls\ModuleTables\TablesView.xaml.cs">
+      <DependentUpon>TablesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PNManagment\PartNumber.xaml.cs">
+      <DependentUpon>PartNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PNManagment\PartNumberConfigModel.cs" />
+    <Compile Include="UserControls\ProductModelManage\Model\TableDefineModel.cs" />
+    <Compile Include="UserControls\ProductModelManage\View\ProductManageView.xaml.cs">
+      <DependentUpon>ProductManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductModelManage\Model\ProductModel.cs" />
+    <Compile Include="UserControls\Settings\Model\GPIBCfgModel.cs" />
+    <Compile Include="UserControls\Settings\Model\UdpCfgModel.cs" />
+    <Compile Include="UserControls\Settings\Model\USBCfgModel.cs" />
+    <Compile Include="UserControls\Settings\View\USBType.xaml.cs">
+      <DependentUpon>USBType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\View\GPIBType.xaml.cs">
+      <DependentUpon>GPIBType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\Model\InstrumentModel.cs" />
+    <Compile Include="UserControls\Settings\Model\SerialPortCfgModel.cs" />
+    <Compile Include="Framework\Communication\ICommunication.cs" />
+    <Compile Include="Framework\Communication\IConfiguration.cs" />
+    <Compile Include="Framework\Communication\SerialPortHelper.cs" />
+    <Compile Include="Framework\Converters\AuthorityConverter.cs" />
+    <Compile Include="Framework\Converters\IsEditedConverter.cs" />
+    <Compile Include="Framework\Converters\LimitConverter.cs" />
+    <Compile Include="Framework\Converters\SubItemSettingConverters.cs" />
+    <Compile Include="Framework\Database\BaseHelper.cs" />
+    <Compile Include="Framework\Database\DbFactory.cs" />
+    <Compile Include="Framework\Database\DBHelperMSSQL.cs" />
+    <Compile Include="Common\InvokeHelper.cs" />
+    <Compile Include="Common\MD5Helper.cs" />
+    <Compile Include="Common\SystemService.cs" />
+    <Compile Include="Framework\Controller\IController.cs" />
+    <Compile Include="Framework\Controller\Controller.cs" />
+    <Compile Include="Framework\Controller\ControllerExtensions.cs" />
+    <Compile Include="Framework\Database\ISqlCondition.cs" />
+    <Compile Include="Framework\Database\ISqlExpression.cs" />
+    <Compile Include="Framework\Database\SqlExpression.cs" />
+    <Compile Include="Framework\Database\SqlExpressionExtensions.cs" />
+    <Compile Include="Framework\Instrument\IInstrumentHelper.cs" />
+    <Compile Include="Framework\Instrument\InstrumentBase.cs" />
+    <Compile Include="Framework\Interfaces\IData.cs" />
+    <Compile Include="Framework\Model\ComboBoxItemModel.cs" />
+    <Compile Include="Framework\Model\IModel.cs" />
+    <Compile Include="Framework\Model\IModelService.cs" />
+    <Compile Include="Framework\Model\PropertyChangedModel.cs" />
+    <Compile Include="Framework\Common\TreeViewHelper.cs" />
+    <Compile Include="Framework\Converters\StringConverter.cs" />
+    <Compile Include="Framework\Converters\NullToEnableConverter.cs" />
+    <Compile Include="Framework\Converters\MultiObjectToBoolConverter.cs" />
+    <Compile Include="Framework\Converters\NullToVisiableConverter.cs" />
+    <Compile Include="Framework\Converters\TreeViewItemSelectedConverter.cs" />
+    <Compile Include="Framework\Converters\VisibilityToBoolConverter.cs" />
+    <Compile Include="Framework\Database\IDBHelper.cs" />
+    <Compile Include="InstrumentDriver\GWPST3208.cs" />
+    <Compile Include="InstrumentDriver\KeysightN1078A.cs" />
+    <Compile Include="InstrumentDriver\KeytechBert.cs" />
+    <Compile Include="InstrumentDriver\SteligentPW3256.cs" />
+    <Compile Include="InstrumentDriver\TektronixDCA.cs" />
+    <Compile Include="Interface\IInvokeHelper.cs" />
+    <Compile Include="Framework\Model\ContextMenuModel.cs" />
+    <Compile Include="Procedure\ProcedureFunctionsCollection.cs" />
+    <Compile Include="UserControls\Home\Model\HomeModel.cs" />
+    <Compile Include="UserControls\InputDialog\InputDialog2.xaml.cs">
+      <DependentUpon>InputDialog2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\InputDialog\InputDialogController.cs" />
+    <Compile Include="UserControls\InputDialog\InputDialogViewModel.cs" />
+    <Compile Include="UserControls\InputDialog\InputDialogModel.cs" />
+    <Compile Include="UserControls\MessageDialog\MessageDialog1.xaml.cs">
+      <DependentUpon>MessageDialog1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MessageDialog\MessagDialogModel.cs" />
+    <Compile Include="UserControls\MessageDialog\MessageDialogViewModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Controller\GroupItemsController.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\FileConfigModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\InstrumentConfigModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\DatabaseConfigModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\VariantConfigModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\View\FileConfig.xaml.cs">
+      <DependentUpon>FileConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\Model\ModuleConfigModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\View\InstrumentConfig.xaml.cs">
+      <DependentUpon>InstrumentConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\View\DatabaseConfig.xaml.cs">
+      <DependentUpon>DatabaseConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\Model\GroupItemsModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\GroupItemsViewModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\ITreeItemsOption.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\TopItemModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Controller\ProcessItemsController.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\ProcessListModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\ProcessItemsViewModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\ProcessItemsModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\Model\SourceItemModel.cs" />
+    <Compile Include="UserControls\ProcessDesign\View\VariantConfig.xaml.cs">
+      <DependentUpon>VariantConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\View\ModuleConfig.xaml.cs">
+      <DependentUpon>ModuleConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemSettings.cs" />
+    <Compile Include="UserControls\ProcessDesign\View\ProcessManage.xaml.cs">
+      <DependentUpon>ProcessManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\View\GroupItemSetting.xaml.cs">
+      <DependentUpon>GroupItemSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\View\ItemsListBox.xaml.cs">
+      <DependentUpon>ItemsListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\View\GroupItems.xaml.cs">
+      <DependentUpon>GroupItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProcessDesign\Model\SubItemModel.cs" />
+    <Compile Include="UserControls\Settings\View\UdpType.xaml.cs">
+      <DependentUpon>UdpType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\View\SerialType.xaml.cs">
+      <DependentUpon>SerialType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\View\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\View\TcpIpType.xaml.cs">
+      <DependentUpon>TcpIpType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Settings\Model\TcpIpCfgModel.cs" />
+    <Compile Include="UserControls\Test\Model\SerialNumberModel.cs" />
+    <Compile Include="UserControls\Test\TaskOptionController.cs" />
+    <Compile Include="UserControls\Test\TaskOptionView.xaml.cs">
+      <DependentUpon>TaskOptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Test\TestItemView.xaml.cs">
+      <DependentUpon>TestItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Test\View\SerialNumberView.xaml.cs">
+      <DependentUpon>SerialNumberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Home\Model\HomeViewModel.cs" />
+    <Compile Include="UserControls\Home\View\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Test\View\ProductionInfo.xaml.cs">
+      <DependentUpon>ProductionInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Test\View\TaskPage.xaml.cs">
+      <DependentUpon>TaskPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Page Include="UserControls\InputDialog\InputDialog2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\InputDialog\InputDialog3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MessageDialog\MessageDialog1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ModuleTables\TablesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PNManagment\PartNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\FileConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\InstrumentConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\DatabaseConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\VariantConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\ModuleConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\ProcessManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\GroupItemSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\ItemsListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TreeViewCustomStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProcessDesign\View\GroupItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ProductModelManage\View\ProductManageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\USBType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\GPIBType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\UdpType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\SerialType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Settings\View\TcpIpType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Test\TaskOptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Test\TestItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Test\View\SerialNumberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Home\View\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Test\View\ProductionInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Test\View\TaskPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Framework\Controller\RelayCommand.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AtsItems.cs" />
+    <Compile Include="Common\DocumentationLinkType.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\Common\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaterialDesignColors.Wpf\MaterialDesignColors.Wpf.csproj">
+      <Project>{90b53209-c60c-4655-b28d-a1b3e1044ba3}</Project>
+      <Name>MaterialDesignColors.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MaterialDesignThemes.Wpf\MaterialDesignThemes.Wpf.csproj">
+      <Project>{f079fb0a-a8ed-4216-b6a5-345756751a04}</Project>
+      <Name>MaterialDesignThemes.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sifontonics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\Base\" />
+    <Folder Include="UserControls\Home\Controller\" />
+    <Folder Include="UserControls\ModuleTables\View\" />
+    <Folder Include="UserControls\Test\Controller\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Steligent PW3256.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

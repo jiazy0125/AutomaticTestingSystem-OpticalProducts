@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.ModuleTables.TablesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutomaticTestingSystem"
+             xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:system="clr-namespace:AutomaticTestingSystem"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="1" VerticalAlignment="Stretch" IsEnabled="False"/>
+        <DataGrid Margin="0 8 0 0" x:Name="TableContentDataGrid" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                  wpf:DataGridAssist.CellPadding="13 8 8 8" 
+                  wpf:DataGridAssist.ColumnHeaderPadding="8">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding IsChanged}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}" CanUserSort="False">
+                    <DataGridCheckBoxColumn.Header>
+                        <Border Background="Transparent" Padding="6 0 6 0" HorizontalAlignment="Center">
+                            <CheckBox HorizontalAlignment="Center"/>
+                            <!--DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"
+                                      IsChecked="{Binding IsAllItems3Selected}"--> 
+                        </Border>
+                    </DataGridCheckBoxColumn.Header>
+                </DataGridCheckBoxColumn>
+                <DataGridTextColumn Binding="{Binding Address}" Header="Address" CanUserSort="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Value}" Header="Value" CanUserSort="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding ValueStr}" Header="Value(String)"  CanUserSort="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*" CanUserSort="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ComboBox HorizontalAlignment="Stretch" x:Name="EVBComboBox" Style="{StaticResource MaterialDesignFloatingHintComboBoxClssic}" Margin="8 19 8 8"
+                      ItemsSource="{x:Static local:SystemSettings.InstrumentsList}" VerticalAlignment="Bottom" DisplayMemberPath="Name">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Foreground="Blue" Margin="-1 0 0 0" Text="EVB Select"/>
+                </wpf:HintAssist.Hint>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <ComboBox HorizontalAlignment="Stretch" x:Name="PdTypeComboBox" Style="{StaticResource MaterialDesignFloatingHintComboBoxClssic}" Margin="8"
+                      VerticalAlignment="Bottom" DisplayMemberPath="Name" SelectionChanged="PdType_SelectionChanged"
+                      Grid.Row="1" SelectedValuePath="Guid">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Foreground="Blue" Margin="-1 0 0 0" Text="Product Select"/>
+                </wpf:HintAssist.Hint>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <ComboBox HorizontalAlignment="Stretch" x:Name="TableSelectComboBox" Style="{StaticResource MaterialDesignFloatingHintComboBoxClssic}" Margin="8"
+                      VerticalAlignment="Bottom" DisplayMemberPath="Name" SelectionChanged="TableSelectComboBox_SelectionChanged" Grid.Row="2"
+                      ItemsSource="{x:Static system:SystemSettings.TablesDetails}">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Foreground="Blue" Margin="-1 0 0 0" Text="Table Select"/>
+                </wpf:HintAssist.Hint>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBox x:Name="UnlockPwTextBox" wpf:HintAssist.Hint="Unloc Password(Hex):11223344" Margin="8" Height="40" HorizontalAlignment="Stretch"
+                         VerticalAlignment="Bottom"/>
+                <wpf:Badged Name="Unlock" VerticalAlignment="Bottom" Margin="8" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Width="80"
+                                        wpf:ButtonAssist.CornerRadius="5"
+                                        wpf:ButtonProgressAssist.Value="-1"
+                                        wpf:ButtonProgressAssist.IsIndicatorVisible="True"
+                                        wpf:ButtonProgressAssist.IsIndeterminate="True" Click="Unlock_Click" Content="Unlock"/>
+                </wpf:Badged>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Margin="0 30 0 0">
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Read selected table"
+                        wpf:RippleAssist.Feedback="#DD000000" Click="Read_Click" Margin="8">      
+                    Read
+                </Button>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Read selected table"
+                        wpf:RippleAssist.Feedback="#DD000000" Click="Write_Click" Margin="8">
+                    Write
+                </Button>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Read selected table"
+                        wpf:RippleAssist.Feedback="#DD000000" Click="Export_Click" Margin="8" Visibility="Collapsed">
+                    Export
+                </Button>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Read selected table"
+                        wpf:RippleAssist.Feedback="#DD000000" Click="ExportAll_Click" Margin="8" Visibility="Collapsed">
+                    Export All
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+
+
+
+    </Grid>
+</UserControl>

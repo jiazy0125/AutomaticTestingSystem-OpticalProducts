@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.InputDialog.InputDialog3"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutomaticTestingSystem.UserControls.InputDialog"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:domain="clr-namespace:AutomaticTestingSystem"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" x:Name="InputDialog" >
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="4" Orientation="Vertical">
+            <TextBox x:Name="InputTextBox" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" FontSize="16"
+                     Margin="4 4" MaxWidth="240" Text="{Binding InputModel.Input1, UpdateSourceTrigger=PropertyChanged}" 
+                     HorizontalAlignment="Stretch">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Margin="-1 0 0 0" Foreground="Blue" Text="{Binding InputModel.Label1}"/>
+                </wpf:HintAssist.Hint>
+            </TextBox>
+            <TextBlock x:Name="WarningLabel1" Foreground="Red" Margin="4"  Visibility="{Binding InputModel.Visibility1}" Text="{Binding InputModel.WarningMsg1}"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" wpf:HintAssist.Foreground="Red" Margin="4"
+                  wpf:TextFieldAssist.UnderlineBrush="Red" TextWrapping="Wrap" TextAlignment="Left" FontSize="16"
+                  MaxWidth="240" Text="{Binding InputModel.Input2, UpdateSourceTrigger=PropertyChanged}" >
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Margin="-1 0 0 0" Foreground="Blue" Text="{Binding InputModel.Label2}"/>
+                </wpf:HintAssist.Hint>
+            </TextBox>
+            <ComboBox HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignFloatingHintComboBoxClssic}"
+                      ItemsSource="{Binding InputModel.ItemsSource}" SelectedItem="{Binding InputModel.Input3}" 
+                      DisplayMemberPath="Name"
+                      Margin="4" FontSize="16">
+                <wpf:HintAssist.Hint>
+                    <TextBlock FontWeight="Bold" Foreground="Blue" Margin="-1 0 0 0" Text="{Binding InputModel.Label3}"/>
+                </wpf:HintAssist.Hint>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1"
+                    Margin="10 0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}" Content="ACCEPT" 
+                    IsEnabled="{Binding InputModel.Button1Enable}">
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button IsCancel="True" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}" Content="CANCEL">
+                <Button.CommandParameter>
+                    <system:Boolean>False
+                    </system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

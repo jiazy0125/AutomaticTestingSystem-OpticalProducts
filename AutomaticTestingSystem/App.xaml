@@ -1,0 +1,41 @@
+﻿<Application x:Class="AutomaticTestingSystem.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AutomaticTestingSystem"
+             xmlns:cvt="clr-namespace:AutomaticTestingSystem.Framework.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/AutomaticTestingSystem;component/Resources/TreeViewCustomStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <cvt:EmptyTextToBoolConverter x:Key="IsEmptyTextEnable"/>
+            <cvt:MultiObjectToBoolConverter x:Key="ObjectsToBool"/>
+            <cvt:NullToEnableConverter x:Key="NullToEnable"/>
+            <cvt:VisibilityToBoolConverter x:Key="InvertVisiableToBool"/>
+            <cvt:TreeViewItemSelectedConverter x:Key="IsSelected"/>
+            <cvt:NullToVisiableConverter x:Key="NullEmptyToVisibility"/>
+            <cvt:ModuleConfigConverter x:Key="ModuleConvert"/>
+            <cvt:DatabaseConfigConverter x:Key="DatabaseConvert"/>
+            <cvt:VariantConfigConverter x:Key="VariantConvert"/>
+            <cvt:InstrumentConfigConverter x:Key="InstrumentConvert"/>
+            <cvt:FileConfigConverter x:Key="FileConvert"/>
+            <cvt:SubItemOperatorConverter x:Key="SubitemLimitConvert"/>
+            <cvt:SubItemContentConverter x:Key="SubItemCCVT"/>
+            <cvt:IsEditedConverter x:Key="IsEdited"/>
+            <cvt:BoolStringConverter x:Key="BoolStringCVT"/>
+            <cvt:LimitConverter x:Key="LimitStringCvt"/>
+            <cvt:BoolReverseConverter x:Key="BoolReverse"/>
+            <cvt:CommnicationTypeConvert x:Key="CommConverter"/>
+            <cvt:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+            <cvt:BoolToVisibilityConverter x:Key="InvertBoolToVisibility" FalseValue="Visible" TrueValue="Collapsed"/>
+            <cvt:PassFailConverter x:Key="PassOrFail"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="AutomaticTestingSystem.UserControls.Test.TestItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutomaticTestingSystem.UserControls.ProcessDesign"
+             xmlns:domain="clr-namespace:AutomaticTestingSystem"
+             xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             >
+    <Grid>
+        <GroupBox Header="Test Items" Style="{DynamicResource MaterialDesignGroupBox}" 
+                  wpf:ShadowAssist.ShadowDepth="Depth2" BorderThickness="0">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}" />
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <TreeView ItemsSource="{x:Static domain:SystemSettings.GroupItems}" HorizontalAlignment="Stretch"
+                      MouseDoubleClick="TreeView_MouseDoubleClick">
+                <TreeView.Resources>
+                    <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+                    <HierarchicalDataTemplate DataType="{x:Type local:TopItemModel}" x:Name="HeaderGroup" ItemsSource="{Binding SubItems}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*" MinWidth="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <wpf:PackIcon Kind="Flame" Margin="5 0 10 0" Foreground="{Binding IsChanged, Converter={StaticResource IsEdited}}"/>
+                            <TextBlock Text="{Binding Name}" Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Stretch"/>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="//" Visibility="{Binding ElementName=gDescription, Path=Text, 
+                                    Converter={StaticResource NullEmptyToVisibility}}"/>
+                                <TextBlock x:Name="gDescription" Text="{Binding Description}" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </Grid>
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type local:SubItemModel}">
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <!--Icon[0]-->
+                                <ColumnDefinition Width="auto"/>
+                                <!--Step Name[1]-->
+                                <ColumnDefinition Width="*" MinWidth="350"/>
+                                <!--limit[2]-->
+                                <ColumnDefinition Width="150"/>
+                                <!--Current Value[3]-->
+                                <ColumnDefinition Width="200"/>
+                                <!--Result[4]-->
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+                            <wpf:PackIcon Kind="GamepadCircleRight" Width="12" Height="12" Margin="12 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" Margin="0 2" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource  LimitStringCvt}">
+                                            <Binding Path="LowerOperator"/>
+                                            <Binding Path="LowerLimit"/>
+                                            <Binding Path="UpperOperator"/>
+                                            <Binding Path="UpperLimit"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding MeasValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2 0" 
+                                           Foreground="{Binding Result, Converter={StaticResource PassOrFail}}" FontStyle="Italic" FontWeight="Bold" 
+                                           FontSize="14"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </TreeView.Resources>
+                <!--<TreeView.ContextMenu>
+                <ContextMenu ItemsSource="{Binding ItemModel.ContextMenu}">
+                    <ContextMenu.ItemTemplate>
+                        <DataTemplate DataType="{x:Type domain:ContextMenuModel}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Separator x:Name="Separaotr1" Grid.ColumnSpan="3" Margin="-10 4" Visibility="Collapsed"/>
+                                <wpf:PackIcon x:Name="PackIcon" Kind="{Binding IconKind}" VerticalAlignment="Center" 
+                                                  HorizontalAlignment="Left" Margin="-10 0 0 0"/>
+                                <TextBlock x:Name="ItemName" Text="{Binding Header}" Margin="15 0" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                <TextBlock x:Name="Shortcut" Text="{Binding Shortcut}"  Margin="20 0 0 0" HorizontalAlignment="Left"
+                                           Grid.Column="2"/>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSeparator}" Value="True">
+                                    <Setter TargetName="Separaotr1" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="PackIcon" Property="Visibility" Value="Collapsed"/>
+                                    <Setter TargetName="ItemName" Property="Visibility" Value="Collapsed"/>
+                                    <Setter TargetName="Shortcut" Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ContextMenu.ItemTemplate>
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                            <Setter Property="IsEnabled" Value="{Binding IsEnable}"/>
+                            <Setter Property="beh:CommandBehavior.Event" Value="{Binding Event}"/>
+                            <Setter Property="beh:CommandBehavior.Command" Value="{Binding Command}"/>
+                            <Setter Property="beh:CommandBehavior.CommandParameter" Value="{Binding Parameter}"/>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                </ContextMenu>
+            </TreeView.ContextMenu>-->
+            </TreeView>
+        </GroupBox>
+    </Grid>
+</UserControl>
